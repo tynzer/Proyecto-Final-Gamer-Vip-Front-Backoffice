@@ -17,14 +17,20 @@ class Modificar extends Component {
       e.preventDefault()
       console.log("eventoSubmitValue: ", e.target[0].value)
       console.log("eventoSubmitDefault: ", e.target[0].defaultValue)
-      fetch(`https://proyecto-final-gamer-vip-back.herokuapp.com/productos/${e.target[5].value}`,{
-        method:'PUT',
+       fetch(`https://proyecto-final-gamer-vip-back.herokuapp.com/productos/${e.target[5].value}`,{
+        method:'PATCH',
         body:JSON.stringify({
           titulo:(e.target[0].value !== "")? e.target[0].value: e.target[0].defaultValue, 
           descripcion:(e.target[1].value !== "")? e.target[1].value: e.target[1].defaultValue,
           precio:(e.target[2].value !== "")? e.target[2].value: e.target[2].defaultValue,
           linkImagen:(e.target[3].value !== "")? e.target[3].value: e.target[3].defaultValue,
-          enabled:(e.target[4].value !== "")? e.target[4].value: e.target[4].defaultValue
+          enabled:(e.target[4].value !== "")? e.target[4].value: e.target[4].defaultValue,
+          categoria: this.props.producto.categoria,
+          marca: this.props.producto.marca,
+          modelo: this.props.producto.modelo,
+          cantidad: this.props.producto.cantidad,
+          SKU : this.props.producto.SKU,
+          peso : this.props.producto.peso          
         }),
         headers:{'Content-Type':'application/json'}
     }).then((res)=>{
@@ -32,7 +38,7 @@ class Modificar extends Component {
     }).then((res)=>{
         console.log("FORMULARIO ENVIADO",res);
         window.alert("Formulario enviado correctamente");
-    });
+    }); 
     
       this.handleClose()
     }
