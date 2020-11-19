@@ -27,7 +27,8 @@ class Categorias extends Component {
             descripcion:(e.target[1].value !== "")? e.target[1].value: e.target[1].defaultValue,
             precio:(e.target[2].value !== "")? e.target[2].value: e.target[2].defaultValue,
             linkImagen:(e.target[3].value !== "")? e.target[3].value: e.target[3].defaultValue,
-            enabled:(e.target[4].value !== "")? e.target[4].value: e.target[4].defaultValue                  
+            enabled:(e.target[4].value !== "")? e.target[4].value: e.target[4].defaultValue,
+            categoria:(e.target[5].value !== "")? e.target[5].value: e.target[5].defaultValue,                 
           }),
           headers:{'Content-Type':'application/json'}
       }).then((res)=>{
@@ -74,6 +75,11 @@ class Categorias extends Component {
                 <Form.Label>Habilitado</Form.Label>
                 <Form.Control type="text"   />
               </Form.Group>
+              <Form.Group>
+              <Form.Label>Categoria</Form.Label>
+                <Form.Control type="text"  />
+                </Form.Group>
+           
            
               <Button variant="primary" type="submit">
                 Guardar
