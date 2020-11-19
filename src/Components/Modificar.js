@@ -17,7 +17,7 @@ class Modificar extends Component {
       e.preventDefault()
       console.log("eventoSubmitValue: ", e.target[0].value)
       console.log("eventoSubmitDefault: ", e.target[0].defaultValue)
-      fetch(`https://proyecto-final-gamer-vip-back.herokuapp.com/${e.target[5].value}`,{
+      fetch(`https://proyecto-final-gamer-vip-back.herokuapp.com/productos/${e.target[5].value}`,{
         method:'PUT',
         body:JSON.stringify({
           titulo:(e.target[0].value !== "")? e.target[0].value: e.target[0].defaultValue, 
