@@ -31,7 +31,7 @@ class App extends Component {
     fetch(`${this.state.url}categorias`)
       .then(res => res.json())
       .then(categorias => {
-          categorias.push({categoria:"Todos los productos"})
+          categorias.unshift({categoria:"Todos los productos"})
           categorias.push({categoria:"Banners"})
           console.log(categorias)
         this.setState({ categorias: categorias });
