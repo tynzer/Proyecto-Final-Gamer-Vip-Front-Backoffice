@@ -22,78 +22,72 @@ class Modificar extends Component {
         
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton></Modal.Header>
-          {this.props.producto &&
+          {(this.props.producto&&
+
           <Form className="p-5" show={this.state.show} onHide={this.handleClose}>
        
   <Form.Group >
     <Form.Label>Titulo</Form.Label>
-    <Form.Control type="text" >{this.props.producto.titulo}</Form.Control>
+    <Form.Control type="text" defaultValue={this.props.producto.titulo}/>
   </Form.Group>
 
   <Form.Group >
     <Form.Label>Descripcion</Form.Label>
-    <Form.Control type="text" >{this.props.producto.descripcion}</Form.Control>
+    <Form.Control type="text" defaultValue={this.props.producto.descripcion}/>
   </Form.Group>
   <Form.Group >
     <Form.Label>Precio</Form.Label>
-    <Form.Control type="text" >{this.props.producto.precio}</Form.Control>
+    <Form.Control type="text" defaultValue={this.props.producto.precio}/>
   </Form.Group>
   <Form.Group >
     <Form.Label>LinkImagen</Form.Label>
-    <Form.Control type="text" >{this.props.producto.linkImagen}</Form.Control>
+    <Form.Control type="text" defaultValue={this.props.producto.linkImagen}/>
   </Form.Group>
   <Form.Group >
     <Form.Label>Habilitado</Form.Label>
-    <Form.Control type="text" >{this.props.producto.enabled}</Form.Control>
+    <Form.Control type="text" defaultValue={this.props.producto.enabled}/>
   </Form.Group>
   <Button variant="primary" type="submit">
     Guardar
   </Button>
-        </Form> ||
-        this.props.imagen && <Form className="p-5" show={this.state.show} onHide={this.handleClose}>
+          </Form> )
+      || (this.props.imagen &&
+        <Form className="p-5" show={this.state.show} onHide={this.handleClose}>
        
         <Form.Group >
           <Form.Label>Titulo</Form.Label>
-          <Form.Control type="text">{this.props.imagen.titulo} </Form.Control>
+          <Form.Control type="text" defaultValue={this.props.imagen.titulo}/> 
         </Form.Group>
       
         <Form.Group >
           <Form.Label>URL</Form.Label>
-          <Form.Control type="text" >{this.props.imagen.URL}</Form.Control>
+          <Form.Control type="text" defaultValue={this.props.imagen.URL}/>
         </Form.Group>
         <Form.Group >
           <Form.Label>Texto</Form.Label>
-          <Form.Control type="text" >{this.props.imagen.texto}</Form.Control>
+          <Form.Control type="text" defaultValue={this.props.imagen.texto}/>
         </Form.Group>
         <Form.Group >
           <Form.Label>Intervalo</Form.Label>
-          <Form.Control type="text">{this.props.imagen.intervalo}</Form.Control>
+          <Form.Control type="text" defaultValue={this.props.imagen.intervalo}/>
         </Form.Group>
         <Form.Group >
           <Form.Label>Categoria</Form.Label>
-          <Form.Control type="text" >{this.props.imagen.categoria}</Form.Control>
+          <Form.Control type="text" defaultValue={this.props.imagen.categoria}/>
         </Form.Group>
         <Form.Group >
           <Form.Label>Habilitado</Form.Label>
-          <Form.Control type="text" >{this.props.imagen.enabled}</Form.Control>
+          <Form.Control type="text" defaultValue={this.props.imagen.enabled}/>
         </Form.Group>
         <Button variant="primary" type="submit">
           Guardar
         </Button>
-              </Form> 
+              </Form> )
 
-        }
-          {/*  <Modal.Title>titulo del producto</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>descripcion</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Cerrar
-            </Button>
-            <Button variant="primary" onClick={this.handleClose}>
-              Guardar
-            </Button>
-          </Modal.Footer>*/}
+      }
+        
+        
+          
         </Modal> 
             </div>
         );
@@ -101,3 +95,10 @@ class Modificar extends Component {
 }
 
 export default Modificar;
+/*
+</Form.Control>
+</Form.Control>
+{this.props.producto.precio}</Form.Control>
+</Form.Control>
+</Form.Control>
+*/
