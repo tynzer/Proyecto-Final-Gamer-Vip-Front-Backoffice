@@ -7,8 +7,12 @@ import Modificar from './Modificar';
 export default class CategoriaProductos extends Component {
     
     render() {
+        console.log("categorias")
         return (
-            <div>
+
+            <div> 
+                categorias
+                {JSON.stringify(this.props.categorias)}
                 <div className="pt-5">
                     <div >{/*className="container-xl" */}
                         <div className="row mx-5">

@@ -8,7 +8,6 @@ import NavBar from "./Components/NavBar";
 import CategoriaProductos from "./Components/CategoriaProductos"
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './Components/Login';
-import ProtectedRoute from './Components/ProtectedRoute';
 
 class App extends Component {
   constructor(props) {
@@ -46,10 +45,8 @@ class App extends Component {
   }
  
   renderProductos = routerProps => {
-    console.log(routerProps)
     let categoriaRouterProps = routerProps.match.params.categoria
     let categoriaProductos = categoriaRouterProps.replace(/-/g, " ");
-    console.log(categoriaProductos)
     if (categoriaProductos === "Todos los productos"){
         return (<CategoriaProductos productos={this.state.productos} categorias={this.state.categorias} />)
     }
@@ -60,9 +57,6 @@ class App extends Component {
     return ( filterProductos ? <CategoriaProductos productos={filterProductos} categorias={this.state.categorias} /> : <NotFound/>)
     }
    
-    renderAbm = () => {
-      return( <Abm carousel={this.state.carousel} categorias={this.state.categorias} />)
-    }
 
   render() {
     return (
@@ -70,9 +64,9 @@ class App extends Component {
         <NavBar/>
         <Switch>
         <Route exact path="/"><Login/></Route>
-         <ProtectedRoute  path="/logueado"  component={this.renderAbm} >{/* <Abm carousel={this.state.carousel} categorias={this.state.categorias} />  */}</ProtectedRoute>
-       <ProtectedRoute path="/logueado/:categoria?" component={this.renderProductos}></ProtectedRoute>  
-      {/*     <Route component={NotFound}/> */}
+          <Route path="/logueado"><Abm carousel={this.state.carousel} categorias={this.state.categorias} /></Route>
+          <Route path="/productos/:categoria?" render={this.renderProductos}></Route>  
+          <Route component={NotFound}/>
         </Switch>
         
       </Router>

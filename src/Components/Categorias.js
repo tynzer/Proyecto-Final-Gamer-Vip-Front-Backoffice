@@ -91,7 +91,7 @@ class Categorias extends Component {
                <h1 className="my-4 border border-secondary">Listar:</h1> 
                </div>
                 <div className="list-group">
-                    { this.props.categorias.map(categoria =>{
+                    {this.props.categorias && this.props.categorias.map(categoria =>{
                         
                         let categoriaTrim = categoria.categoria.trim();
                         let categoriaReplace = categoriaTrim.replace(/\s/g, "-");

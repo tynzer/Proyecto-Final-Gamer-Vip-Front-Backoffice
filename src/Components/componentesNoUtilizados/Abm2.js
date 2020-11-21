@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Categorias from './Categorias';
+import Categorias from '../Categorias';
 
 class Home extends Component {
   render() {
