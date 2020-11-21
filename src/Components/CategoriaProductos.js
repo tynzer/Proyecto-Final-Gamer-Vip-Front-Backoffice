@@ -35,8 +35,8 @@ export default class CategoriaProductos extends Component {
                                                 </ListGroup>
                                                 
                                             </div>    
-                                    )}) ||
-                                    this.props.carousel && this.props.carousel.map(imagen => { 
+                                    )})} 
+                                    {this.props.carousel && this.props.carousel.map(imagen => { 
                                         return(
                                             <div key={imagen._id} className="col-lg-6 col-md-2 mb-4">
                                                 <ListGroup>
