@@ -51,10 +51,10 @@ class App extends Component {
     let categoriaProductos = categoriaRouterProps.replace(/-/g, " ") || categoriaRouterProps
     console.log("categoria prodcutos",categoriaProductos)
     if (categoriaProductos === "Todos los productos") {
-      return (<CategoriaProductos productos={this.state.productos} categorias={this.state.categorias} />)
+      return (<><NavBar /><CategoriaProductos productos={this.state.productos} categorias={this.state.categorias} /></>)
     }
     if (categoriaProductos === "Banners") {
-      return (<CategoriaProductos carousel={this.state.carousel} categorias={this.state.categorias} />)
+      return (<><NavBar /><CategoriaProductos carousel={this.state.carousel} categorias={this.state.categorias} /></>)
     }
    /*  Hasta que cambie el estado no muestro nada  */
    else{
@@ -75,9 +75,9 @@ class App extends Component {
       <Router>
         <NavBar />
         <Switch>
-           <ProtectedRoute exact path="/"><CategoriaProductos productos={this.state.productos} categorias={this.state.categorias} /></ProtectedRoute>        {/*   <ProtectedRoute carousel={this.state.carousel} categorias={this.state.categorias} path="/logueado" Component={this.renderAbm}></ProtectedRoute> */}
-          <Route exact path="/login"><Login /></Route>    
-          <ProtectedRoute exact path="/productos"><CategoriaProductos productos={this.state.productos} categorias={this.state.categorias} /></ProtectedRoute>
+           <ProtectedRoute exact path="/"><NavBar /><CategoriaProductos productos={this.state.productos} categorias={this.state.categorias} /></ProtectedRoute>        {/*   <ProtectedRoute carousel={this.state.carousel} categorias={this.state.categorias} path="/logueado" Component={this.renderAbm}></ProtectedRoute> */}
+          <Route exact path="/login"><NavBar /><Login /></Route>    
+          <ProtectedRoute exact path="/productos"><NavBar /><CategoriaProductos productos={this.state.productos} categorias={this.state.categorias} /></ProtectedRoute>
           <ProtectedRoute productos={this.state.productos} categorias={this.state.categorias} carousel={this.state.carousel} path="/productos/:categoria?" Component={this.renderProductos}></ProtectedRoute>
           <Route component={NotFound} />
         </Switch>

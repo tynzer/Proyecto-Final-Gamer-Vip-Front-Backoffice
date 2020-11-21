@@ -16,7 +16,7 @@ class Login extends Component {
     e.preventDefault()
     console.log("eventoSubmitValue: ", e.target[0].value)
     console.log("eventoSubmitDefault: ", e.target[0].defaultValue)
-    let that = this
+    let that = this // porque pierdo el scope
     fetch("https://proyecto-final-gamer-vip-back.herokuapp.com/login", {
       method: 'POST',
       body: JSON.stringify({
@@ -26,8 +26,8 @@ class Login extends Component {
       headers: { 'Content-Type': 'application/json' }
     }).then((res) => {
       if (res.status === 201) {  //ACA CAMBIAR POR 200
+        localStorage.setItem("login", JSON.stringify(true))
         that.setState({ redireccionar: true })
-        localStorage.setItem("login", JSON.stringify(true) )
       }
 
       console.log("FORMULARIO ENVIADO", res);
