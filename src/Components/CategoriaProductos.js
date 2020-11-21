@@ -11,8 +11,6 @@ export default class CategoriaProductos extends Component {
         return (
 
             <div> 
-                categorias
-                {JSON.stringify(this.props.categorias)}
                 <div className="pt-5">
                     <div >{/*className="container-xl" */}
                         <div className="row mx-5">
