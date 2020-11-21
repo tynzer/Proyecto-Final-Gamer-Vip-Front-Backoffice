@@ -1,15 +1,17 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 
-const ProtectedRoute = ({ Component: Component, categorias, carousel, productos, ...rest }) => {
-  const isAuthenticated = JSON.parse(localStorage.getItem('login'));
+const ProtectedRoute = ({ component: Component, ...rest  }) => {
+   const isAuthenticated = JSON.parse(localStorage.getItem('token')) && JSON.parse(localStorage.getItem('userId'))
+
   return isAuthenticated ? (
     // Show the component only when the user is logged in
     // Otherwise, redirect the user to /signin page
+//en component: es por defecto el nombre de los que se pasa en routes, se cambia el nombre porque tiene que ser mayuscula siempre los componentes
+   
+<Route {...rest} render={rest  => (
 
-    <Route {...rest} render={rest => (
-
-      <Component categorias={categorias} carousel={carousel} productos={productos} {...rest} />
+      <Component {...rest} />
 
     )} />) : (
       <Redirect to={{ pathname: '/login' }} />
@@ -18,17 +20,17 @@ const ProtectedRoute = ({ Component: Component, categorias, carousel, productos,
 
 export default ProtectedRoute;
 
-/* const Component = this.props.component;
-const isAuthenticated = localStorage.getItem('login');
-
-return isAuthenticated ? (
-    <Route {...this.props.params }>
-  <Component /> </Route>
-) : (
-    <Redirect to={{ pathname: '/' }} />
-);
-}
-}
+/* const ProtectedRoute = ({ component: Comp, loggedIn, path, ...rest }) => {
+  return (
+    <Route
+      path={path}
+      {...rest}
+      render={props => {
+        return loggedIn ? <Comp {...props} /> : <Redirect to="/" />;
+      }}
+    />
+  );
+};
  */
 
 

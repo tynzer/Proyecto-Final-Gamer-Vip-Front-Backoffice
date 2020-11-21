@@ -78,7 +78,7 @@ class App extends Component {
            <ProtectedRoute exact path="/"><NavBar /><CategoriaProductos productos={this.state.productos} categorias={this.state.categorias} /></ProtectedRoute>        {/*   <ProtectedRoute carousel={this.state.carousel} categorias={this.state.categorias} path="/logueado" Component={this.renderAbm}></ProtectedRoute> */}
           <Route exact path="/login"><NavBar /><Login /></Route>    
           <ProtectedRoute exact path="/productos"><NavBar /><CategoriaProductos productos={this.state.productos} categorias={this.state.categorias} /></ProtectedRoute>
-          <ProtectedRoute productos={this.state.productos} categorias={this.state.categorias} carousel={this.state.carousel} path="/productos/:categoria?" Component={this.renderProductos}></ProtectedRoute>
+          <ProtectedRoute productos={this.state.productos} categorias={this.state.categorias} carousel={this.state.carousel} path="/productos/:categoria?" component={this.renderProductos}></ProtectedRoute>
           <Route component={NotFound} />
         </Switch>
       </Router>

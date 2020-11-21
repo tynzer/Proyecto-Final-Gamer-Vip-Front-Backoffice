@@ -9,6 +9,7 @@ class Login extends Component {
     super(props);
     this.state = {
       redireccionar: false,
+      isAuthenticated: false,
     }
   }
 
@@ -23,26 +24,40 @@ class Login extends Component {
         email: (e.target[0].value !== "") ? e.target[0].value : e.target[0].defaultValue,
         password: (e.target[1].value !== "") ? e.target[1].value : e.target[1].defaultValue
       }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }).then((res) => {
-      if (res.status === 201) {  //ACA CAMBIAR POR 200
-        localStorage.setItem("login", JSON.stringify(true))
-        that.setState({ redireccionar: true })
+      if (res.status === 200) { // ACA IBA POR 201
+        /* localStorage.setItem("login", JSON.stringify(true)) */
+        that.setState({ isAuthenticated: true })
+        return res.json()
       }
 
-      console.log("FORMULARIO ENVIADO", res);
-      /*    window.alert("Formulario enviado correctamente"); */
-    });
+    }
+
+    ).then(data => {
+      if (that.state.isAuthenticated) {
+        localStorage.setItem("userId", JSON.stringify(data.userId))
+        localStorage.setItem("token", JSON.stringify(data.token))
+        /*      that.setState({ isAuthenticated: true }) 
+             if (that.state.isAuthenticated){ */
+        that.setState({ redireccionar: true })
+      }
+      else { window.alert("Login incorrecto"); }
+    })
+
+
+    /*   console.log("FORMULARIO ENVIADO", res);
+       window.alert("Formulario enviado correctamente"); 
+   });*/
+
   }
 
   render() {
     if (this.state.redireccionar) {
       return (<Redirect to={"/productos/"} />)
-
-
-
     } else {
-
       return (
         <div className="container mx-auto">
           <h1 className="mt-5 pt-5">Back Office Gamer Vip - Login</h1>

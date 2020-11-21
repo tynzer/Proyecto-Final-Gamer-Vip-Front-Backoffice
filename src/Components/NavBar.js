@@ -15,7 +15,8 @@ class NavBar extends Component {
 
     handleClick = (e) => {
         e.preventDefault()
-        localStorage.removeItem('login')
+        localStorage.removeItem('token')
+        localStorage.removeItem('userId')
         this.setState({ redirectLogin: true })
         console.log(this)
     }

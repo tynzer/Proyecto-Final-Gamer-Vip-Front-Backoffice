@@ -30,7 +30,10 @@ class Categorias extends Component {
             enabled:(e.target[4].value !== "")? e.target[4].value: e.target[4].defaultValue,
             categoria:(e.target[5].value !== "")? e.target[5].value: e.target[5].defaultValue,                 
           }),
-          headers:{'Content-Type':'application/json'}
+          headers:{
+          'Content-Type':'application/json',
+          'Authorization': 'Bearer ' +  JSON.parse(localStorage.getItem('token'))
+        }
       }).then((res)=>{
           return res.json()
       }).then((res)=>{
