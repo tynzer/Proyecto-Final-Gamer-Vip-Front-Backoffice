@@ -2,7 +2,7 @@ import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
 
 const ProtectedRoute = ({ Component: Component, categorias, carousel, productos, ...rest }) => {
-  const isAuthenticated = localStorage.getItem('login');
+  const isAuthenticated = JSON.parse(localStorage.getItem('login'));
   return isAuthenticated ? (
     // Show the component only when the user is logged in
     // Otherwise, redirect the user to /signin page

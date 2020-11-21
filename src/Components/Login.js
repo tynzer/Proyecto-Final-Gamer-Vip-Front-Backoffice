@@ -27,7 +27,7 @@ class Login extends Component {
     }).then((res) => {
       if (res.status === 201) {  //ACA CAMBIAR POR 200
         that.setState({ redireccionar: true })
-        localStorage.setItem("login", true)
+        localStorage.setItem("login", JSON.stringify(true) )
       }
 
       console.log("FORMULARIO ENVIADO", res);
