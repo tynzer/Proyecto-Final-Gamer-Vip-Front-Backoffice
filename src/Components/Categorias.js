@@ -8,10 +8,13 @@ class Categorias extends Component {
     constructor(props) {
         super(props);
         this.state={
-            show: false
+            show: false, 
+             isChecked:  true,
+            isCheckedDestacado :  true
+          }
             
         }
-    }
+    
     handleClose = () => this.setState({show:false});
     handleShow = () => this.setState({show:true});
 
@@ -23,12 +26,19 @@ class Categorias extends Component {
          fetch('https://proyecto-final-gamer-vip-back.herokuapp.com/productos/',{
           method:'POST',
           body:JSON.stringify({
-            titulo:(e.target[0].value !== "")? e.target[0].value: e.target[0].defaultValue, 
-            descripcion:(e.target[1].value !== "")? e.target[1].value: e.target[1].defaultValue,
-            precio:(e.target[2].value !== "")? e.target[2].value: e.target[2].defaultValue,
-            linkImagen:(e.target[3].value !== "")? e.target[3].value: e.target[3].defaultValue,
-            enabled:(e.target[4].value !== "")? e.target[4].value: e.target[4].defaultValue,
-            categoria:(e.target[5].value !== "")? e.target[5].value: e.target[5].defaultValue,                 
+            titulo:e.target[0].value ,
+        descripcion: e.target[1].value,
+        precio: e.target[2].value ,
+        linkImagen: e.target[3].value,
+        descuento:  e.target[4].value, 
+        enabled:   this.state.isChecked, // seria la otra opcion que no anda
+        destacado:   this.state.isCheckedDestacado,
+     /*    categoria: this.props.producto.categoria,
+        marca: this.props.producto.marca,
+        modelo: this.props.producto.modelo,
+        cantidad: this.props.producto.cantidad,
+        SKU: this.props.producto.SKU,
+        peso: this.props.producto.peso     */            
           }),
           headers:{
           'Content-Type':'application/json',
@@ -45,6 +55,22 @@ class Categorias extends Component {
       }
 
 
+      toggleChange = () => {
+        console.log("hablitado ")
+        this.setState({
+          isChecked: !this.state.isChecked
+        });
+      }
+    
+    
+      toggleChangeDestacado = () => {
+            this.setState({
+              isCheckedDestacado: !this.state.isCheckedDestacado
+        });
+      }
+
+
+
 
     render() {
         return (
@@ -58,32 +84,38 @@ class Categorias extends Component {
 
         <Form onSubmit={this.handleSubmit} className="p-5" show={this.state.show} onHide={this.handleClose}>
               
-              <Form.Group >
+        <Form.Group >
                 <Form.Label>Titulo</Form.Label>
-                <Form.Control type="text"   />
+                <Form.Control type="text"  />
               </Form.Group>
               <Form.Group >
                 <Form.Label>Descripcion</Form.Label>
-                <Form.Control type="text"   />
+                <Form.Control type="text"  />
               </Form.Group>
               <Form.Group >
                 <Form.Label>Precio</Form.Label>
-                <Form.Control type="text"  />
+                <Form.Control type="text" />
               </Form.Group>
               <Form.Group >
                 <Form.Label>LinkImagen</Form.Label>
-                <Form.Control type="text"   />
+                <Form.Control type="text"  />
               </Form.Group>
               <Form.Group >
-                <Form.Label>Habilitado</Form.Label>
-                <Form.Control type="text"   />
-              </Form.Group>
-              <Form.Group>
-              <Form.Label>Categoria</Form.Label>
+                <Form.Label>Precio de Oferta</Form.Label>
                 <Form.Control type="text"  />
-                </Form.Group>
-           
-           
+              </Form.Group>
+              <Form.Group >
+                <Form.Label>Producto habilitado</Form.Label>
+                <Form.Check type='checkbox' /*  value={this.props.producto.enabled} */  
+                defaultChecked={this.state.isChecked}                
+                onClick={this.toggleChange}/>
+              </Form.Group>
+              <Form.Group >
+                <Form.Label>Producto destacado</Form.Label>
+                <Form.Check type='checkbox' /*  value={this.props.producto.enabled} */  
+                defaultChecked={this.state.isCheckedDestacado}                
+                onClick={this.toggleChangeDestacado}/>
+              </Form.Group>
               <Button variant="primary" type="submit">
                 Guardar
               </Button>
@@ -100,12 +132,12 @@ class Categorias extends Component {
                         let categoriaReplace = categoriaTrim.replace(/\s/g, "-");
                         if (categoria === "Todos-los-productos"){
                             return (
-                                <NavLink to="/productos" className="list-group-item">{categoria.categoria}</NavLink>
+                                <NavLink key={categoria._id} to="/productos" className="list-group-item">{categoria.categoria}</NavLink>
                             )
                         }
                         else if (categoria === "Banners") {
                             return (
-                                <NavLink to="/productos" className="list-group-item">{categoria.categoria}</NavLink>
+                                <NavLink  key={categoria._id}to="/productos" className="list-group-item">{categoria.categoria}</NavLink>
                             )
                         }
                         else {
