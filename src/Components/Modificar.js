@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 
@@ -6,8 +5,8 @@ class Modificar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      show: false
-
+      show: false,
+      isChecked: this.props.producto.enabled || false
     }
   }
   handleClose = () => this.setState({ show: false });
@@ -15,8 +14,22 @@ class Modificar extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+   /*  let enabledImp= e.target[4].value || e.target[4].defaultValue
+     if (enabledImp=="true" || enabledImp=="verdadeo")  {
+        enabledImp = true
+     }
+     else{
+
+     }
+       
+     
+    (e.target[4].value !== "") ? e.target[4].value : e.target[4].defaultValue,*/
+    console.log("envento chekded: ",this.state.isChecked)
+    console.log("este nuevo checked: ",e.target[4].checked)
+     
     console.log("eventoSubmitValue: ", e.target[0].value)
     console.log("eventoSubmitDefault: ", e.target[0].defaultValue)
+    console.log("evento habilitado: ", e)
     fetch(`https://proyecto-final-gamer-vip-back.herokuapp.com/productos/${e.target[5].value}`, {
       method: 'PATCH',
       body: JSON.stringify({
@@ -24,7 +37,7 @@ class Modificar extends Component {
         descripcion: (e.target[1].value !== "") ? e.target[1].value : e.target[1].defaultValue,
         precio: (e.target[2].value !== "") ? e.target[2].value : e.target[2].defaultValue,
         linkImagen: (e.target[3].value !== "") ? e.target[3].value : e.target[3].defaultValue,
-        enabled: (e.target[4].value !== "") ? e.target[4].value : e.target[4].defaultValue,
+        enabled:   this.state.isChecked, // seria la otra opcion que no anda
         categoria: this.props.producto.categoria,
         marca: this.props.producto.marca,
         modelo: this.props.producto.modelo,
@@ -46,7 +59,15 @@ class Modificar extends Component {
     this.handleClose()
   }
 
+  toggleChange = (e) => {
+    console.log("hablitado ")
+    this.setState({
+      isChecked: !this.state.isChecked
+    });
+  }
+
   render() {
+    console.log("evento inicializado: ", this.state.isChecked)
     return (
       <div>
         <Button variant="primary" onClick={this.handleShow}>
@@ -56,7 +77,6 @@ class Modificar extends Component {
           <Modal.Header closeButton></Modal.Header>
           {(this.props.producto &&
             <Form onSubmit={this.handleSubmit} className="p-5" show={this.state.show} onHide={this.handleClose}>
-
               <Form.Group >
                 <Form.Label>Titulo</Form.Label>
                 <Form.Control type="text" defaultValue={this.props.producto.titulo} />
@@ -75,7 +95,9 @@ class Modificar extends Component {
               </Form.Group>
               <Form.Group >
                 <Form.Label>Habilitado</Form.Label>
-                <Form.Control type="text" defaultValue={this.props.producto.enabled} />
+                <Form.Check type='checkbox' /*  value={this.props.producto.enabled} */  
+                checked={this.state.isChecked}                
+                onClick={(e)=> this.toggleChange(e)}/>
               </Form.Group>
               <Form.Group >
                 <Form.Label>Id</Form.Label>
